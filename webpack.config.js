@@ -3,7 +3,7 @@ var pathToPhaser = path.join(__dirname, "/node_modules/phaser/");
 var phaser = path.join(pathToPhaser, "dist/phaser.js");
 
 module.exports = {
-  entry: "./src/main.ts",
+  entry: "./main.ts",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"
@@ -19,7 +19,7 @@ module.exports = {
     publicPath: "/dist/",
     host: "127.0.0.1",
     port: 8080,
-    open: true
+    open: false
   },
   resolve: {
     extensions: [".ts", ".js"],
