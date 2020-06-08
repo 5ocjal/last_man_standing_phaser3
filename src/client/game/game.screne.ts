@@ -6,6 +6,7 @@ export class GameScene extends Phaser.Scene {
   public game: Phaser.Game;
   public shotAction;
   public trapAction;
+  public playerRun;
   public pointer;
 
   public rotationSpeed = 1 * Math.PI;
@@ -18,6 +19,7 @@ export class GameScene extends Phaser.Scene {
   public preload() {
     console.log('preload');
     this.load.image('ground', '../public/assets/map/ground.png');
+    this.load.image('aim', 'public/assets/gui/aim.png');
     this.load.spritesheet('idle', '../public/assets/sprites/idle.png', {
       frameWidth: 597,
       frameHeight: 363,
@@ -30,7 +32,7 @@ export class GameScene extends Phaser.Scene {
 
   public create() {
     console.log('create');
-    this.physics.world.setBounds(0, 0, 800, 600);
+    this.physics.world.setBounds(0, 0, 1800, 1600);
 
     this.add.image(400, 300, 'ground');
 
@@ -56,20 +58,23 @@ export class GameScene extends Phaser.Scene {
 
     this.actor = new Player(this);
     this.actors.push[this.actor];
-    this.cameras.main.fadeIn(4000, 247, 208, 36);
+    this.cameras.main.fadeIn(4000, 72, 89, 54);
     this.cameras.main.startFollow(this.actor.player);
+    this.input.setDefaultCursor('url(public/assets/gui/aim.png), pointer');
     this.pointer = this.input.activePointer;
     this.shotAction = this.input.keyboard.addKey('Space');
     this.trapAction = this.input.keyboard.addKey('Shift');
+    this.playerRun = this.input.keyboard.addKey('Ctrl');
   }
 
   public update() {
     this.pointerMove();
     this.pointer.isDown
-      ? this.physics.moveTo(this.actor.player, this.pointer.worldX, this.pointer.worldY, 100)
+      ? this.physics.moveTo(this.actor.player, this.pointer.worldX, this.pointer.worldY, this.actor.player.velocity)
       : this.physics.moveTo(this.actor.player, this.pointer.worldX, this.pointer.worldY, 0);
     this.shotAction.isDown ? console.log('shot') : null;
     this.trapAction.isDown ? console.log('trap') : null;
+    this.playerRun.isDown ? (this.actor.player.velocity = 200) : (this.actor.player.velocity = 100);
   }
 
   protected properties(): void {

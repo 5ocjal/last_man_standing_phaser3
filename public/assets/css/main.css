@@ -4,10 +4,12 @@
 
 h1 {
   text-align: center;
+  color: #f7d024;
   font-family: 'Bangers', cursive; }
 
 body {
-  background: #f7d024; }
+  background: #485936;
+  height: 100vh; }
 
 canvas {
   display: block;
@@ -15,5 +17,5 @@ canvas {
   justify-content: center;
   align-items: center;
   border-radius: 20px;
-  background: #f7d024;
-  box-shadow: -8px -8px 16px #b99c1b, 8px 8px 16px #f3f346; }
+  background: #485936;
+  box-shadow: -7px -7px 14px #2b3620, 7px 7px 14px #637a4a; }
