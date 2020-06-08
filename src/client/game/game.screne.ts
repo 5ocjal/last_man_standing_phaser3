@@ -14,6 +14,7 @@ export class GameScene extends Phaser.Scene {
   public rotationTolerance = 0.02 * this.rotationSpeed;
   public velocityFromRotation = Phaser.Physics.Arcade.ArcadePhysics.prototype.velocityFromRotation;
 
+
   protected manageAssets(): void {}
 
   public preload() {
@@ -32,14 +33,14 @@ export class GameScene extends Phaser.Scene {
 
   public create() {
     console.log('create');
-    this.physics.world.setBounds(0, 0, 1800, 1600);
+    //this.physics.world.setBounds(0, 0, 1800, 1600);
 
-    this.add.image(400, 300, 'ground');
+    this.add.image(0, 0, 'ground');
 
     this.createAnimations();
     this.actor = new Player(this);
     this.actors.push[this.actor];
-    this.cameras.main.fadeIn(4000, 72, 89, 54);
+    this.cameras.main.fadeIn(4000, 17, 47, 65);
     this.cameras.main.startFollow(this.actor.player);
     this.input.setDefaultCursor('url(public/assets/gui/aim.png), pointer');
     this.pointer = this.input.activePointer;

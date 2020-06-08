@@ -1,14 +1,15 @@
-import "phaser";
-import { GameScene } from "../game/game.screne";
+import 'phaser';
+import { GameScene } from '../game/game.screne';
+
 
 const config: Phaser.Types.Core.GameConfig = {
   width: 800,
   height: 600,
   type: Phaser.AUTO,
-  parent: "game",
+  parent: 'game',
   scene: [GameScene],
   physics: {
-    default: "arcade",
+    default: 'arcade',
     arcade: {
       gravity: { y: 0 },
       debug: false,
@@ -25,7 +26,7 @@ export class LMSGame extends Phaser.Game {
   }
 }
 
-window.addEventListener("load", () => {
+window.addEventListener('load', () => {
   const game = new LMSGame(config);
   window.focus();
 });

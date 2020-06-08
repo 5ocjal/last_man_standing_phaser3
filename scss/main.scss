@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Bangers|Roboto&display=swap');
 
 $mainColor: #f7d024;
-$secColor: #485936;
+$secColor: #112f41;
 
 * {
     box-sizing: border-box;
@@ -11,13 +11,11 @@ h1 {
     text-align: center;
     color: $mainColor;
     font-family: 'Bangers', cursive;
-    
+
 }
 
 body {
     background: $secColor;
-    height: 100vh;
-    //background: url('../gui/background.png') no-repeat center right /cover;
 }
 
 canvas {
@@ -27,6 +25,6 @@ canvas {
     align-items: center;
     border-radius: 20px;
     background: $secColor;
-    box-shadow: -7px -7px 14px #2b3620,
-        7px 7px 14px #637a4a;
+    box-shadow: -8px -8px 16px #07151d,
+        8px 8px 16px #2d698f;
 }
