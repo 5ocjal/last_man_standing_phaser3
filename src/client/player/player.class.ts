@@ -1,8 +1,5 @@
-import { KeyBoardControl } from '../controls/keyboard.class';
-
 export class Player {
   public player: Phaser.GameObjects.Sprite & { id: string };
-  public controls: KeyBoardControl;
   public playerState: Map<string, boolean | number>;
   public velocity: number = 300;
   public ammo: number = 3;
@@ -22,14 +19,5 @@ export class Player {
       .play('idle');
     this.player.id = '1';
     this.player.name = 'Red';
-    this.addControls(gameInstance);
-  }
-
-  public view(): void {
-    this.controls.update();
-  }
-
-  private addControls(gameInstance): void {
-    this.controls = gameInstance.input.keyboard.createCursorKeys();
   }
 }

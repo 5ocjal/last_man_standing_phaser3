@@ -4,7 +4,8 @@ export class GameScene extends Phaser.Scene {
   public actors = [];
   public actor: any;
   public game: Phaser.Game;
-  public control;
+  public shotAction;
+  public trapAction;
   public pointer;
 
   public rotationSpeed = 1 * Math.PI;
@@ -13,11 +14,6 @@ export class GameScene extends Phaser.Scene {
   public velocityFromRotation = Phaser.Physics.Arcade.ArcadePhysics.prototype.velocityFromRotation;
 
   protected manageAssets(): void {}
-  protected gameUpdate(): void {
-    if (this.actor && this.actor.controls) {
-      this.actor.view();
-    }
-  }
 
   public preload() {
     console.log('preload');
@@ -63,25 +59,17 @@ export class GameScene extends Phaser.Scene {
     this.cameras.main.fadeIn(4000, 247, 208, 36);
     this.cameras.main.startFollow(this.actor.player);
     this.pointer = this.input.activePointer;
+    this.shotAction = this.input.keyboard.addKey('Space');
+    this.trapAction = this.input.keyboard.addKey('Shift');
   }
 
   public update() {
-    //  if (this.cursors.down.isDown) {
-    //    this.actor.player.setVelocityY(100);
-    //  } else if (this.cursors.up.isDown) {
-    //    this.actor.player.setVelocityY(-100);
-    //  } else if (this.cursors.left.isDown) {
-    //    this.actor.player.setVelocityX(-100);
-    //  } else if (this.cursors.right.isDown) {
-    //    this.actor.player.setVelocityX(100);
-    //  } else {
-    //    this.actor.player.setVelocity(0);
-    //  }
-
     this.pointerMove();
     this.pointer.isDown
       ? this.physics.moveTo(this.actor.player, this.pointer.worldX, this.pointer.worldY, 100)
       : this.physics.moveTo(this.actor.player, this.pointer.worldX, this.pointer.worldY, 0);
+    this.shotAction.isDown ? console.log('shot') : null;
+    this.trapAction.isDown ? console.log('trap') : null;
   }
 
   protected properties(): void {
