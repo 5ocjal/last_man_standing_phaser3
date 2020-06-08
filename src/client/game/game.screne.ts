@@ -20,11 +20,11 @@ export class GameScene extends Phaser.Scene {
     console.log('preload');
     this.load.image('ground', '../public/assets/map/ground.png');
     this.load.image('aim', 'public/assets/gui/aim.png');
-    this.load.spritesheet('idle', '../public/assets/sprites/idle.png', {
+    this.load.spritesheet('idle', 'public/assets/sprites/idle.png', {
       frameWidth: 597,
       frameHeight: 363,
     });
-    this.load.spritesheet('walk', '../public/assets/sprites/walk.png', {
+    this.load.spritesheet('walk', 'public/assets/sprites/walk.png', {
       frameWidth: 586,
       frameHeight: 354,
     });
@@ -36,26 +36,7 @@ export class GameScene extends Phaser.Scene {
 
     this.add.image(400, 300, 'ground');
 
-    this.anims.create({
-      key: 'idle',
-      frames: this.anims.generateFrameNumbers('idle', {
-        start: 0,
-        end: 7,
-      }),
-      frameRate: 5,
-      repeat: -1,
-    });
-
-    this.anims.create({
-      key: 'walk',
-      frames: this.anims.generateFrameNumbers('walk', {
-        start: 0,
-        end: 5,
-      }),
-      frameRate: 7,
-      repeat: -1,
-    });
-
+    this.createAnimations();
     this.actor = new Player(this);
     this.actors.push[this.actor];
     this.cameras.main.fadeIn(4000, 72, 89, 54);
@@ -65,14 +46,25 @@ export class GameScene extends Phaser.Scene {
     this.shotAction = this.input.keyboard.addKey('Space');
     this.trapAction = this.input.keyboard.addKey('Shift');
     this.playerRun = this.input.keyboard.addKey('Ctrl');
+    this.properties();
   }
 
   public update() {
     this.pointerMove();
-    this.pointer.isDown
-      ? this.physics.moveTo(this.actor.player, this.pointer.worldX, this.pointer.worldY, this.actor.player.velocity)
-      : this.physics.moveTo(this.actor.player, this.pointer.worldX, this.pointer.worldY, 0);
-    this.shotAction.isDown ? console.log('shot') : null;
+    if (this.pointer.isDown) {
+      this.physics.moveTo(
+        this.actor.player,
+        this.pointer.worldX,
+        this.pointer.worldY,
+        this.actor.player.velocity
+      );
+      this.actor.player.play('walk', true);
+    } else {
+      this.physics.moveTo(this.actor.player, this.pointer.worldX, this.pointer.worldY, 0);
+      this.actor.player.play('idle', true);
+    }
+
+    this.shotAction.isDown ? console.log('shot', this.actor.player.play('walk')) : null;
     this.trapAction.isDown ? console.log('trap') : null;
     this.playerRun.isDown ? (this.actor.player.velocity = 200) : (this.actor.player.velocity = 100);
   }
@@ -110,5 +102,27 @@ export class GameScene extends Phaser.Scene {
     } else {
       this.actor.player.setAngularVelocity(Math.sign(angleDelta) * this.rotationDegrees);
     }
+  }
+
+  public createAnimations() {
+    this.anims.create({
+      key: 'idle',
+      frames: this.anims.generateFrameNumbers('idle', {
+        start: 0,
+        end: 7,
+      }),
+      frameRate: 5,
+      repeat: -1,
+    });
+
+    this.anims.create({
+      key: 'walk',
+      frames: this.anims.generateFrameNumbers('walk', {
+        start: 0,
+        end: 5,
+      }),
+      frameRate: 7,
+      repeat: -1,
+    });
   }
 }
